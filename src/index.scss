@@ -1,0 +1,9 @@
+@import "./style/reset";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.form-control {
+    // @apply rounded-lg shadow-lg;
+}

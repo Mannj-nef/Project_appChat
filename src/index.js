@@ -1,14 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import App from "./App";
+import { AuthProvider } from "./contexts/auth-context";
+import { RoomProvider } from "./contexts/chat-room-context";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
-      <App />
+      <AuthProvider>
+        <ToastContainer />
+        <RoomProvider>
+          <App />
+        </RoomProvider>
+      </AuthProvider>
     </Router>
   </React.StrictMode>
 );
