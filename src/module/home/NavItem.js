@@ -2,8 +2,11 @@ import React from "react";
 
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
+import { useRoomContext } from "../../contexts/chat-room-context";
 
 const NavItem = ({ children, item, ...props }) => {
+  const { showDashboard, setShowDashboard } = useRoomContext();
+
   if (item.path) {
     return (
       <NavLink
@@ -23,7 +26,12 @@ const NavItem = ({ children, item, ...props }) => {
   return (
     <div
       to={item.path}
-      className=" border-l-2 border-l-blue-500 px-5 py-3 cursor-pointer text-white"
+      className=" border-l-2 border-l-transparent px-5 py-3 cursor-pointer text-white"
+      onClick={
+        item.name === "Dashboard"
+          ? () => setShowDashboard(!showDashboard)
+          : item.onClick
+      }
       {...props}
     >
       {children}

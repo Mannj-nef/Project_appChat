@@ -7,6 +7,7 @@ module.exports = {
         black17: "#17191a",
         black27: "#272a30",
         black35: "#353738",
+        black007a: "#0000007a",
       },
     },
   },

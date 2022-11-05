@@ -16,14 +16,15 @@ const InputTogglePassword = ({
     defaultValue: "",
   });
 
-  const ClassIcon = "input-icon absolute right-2 top-1/2 cursor-pointer ";
+  const ClassIcon =
+    "input-icon absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer ";
 
   const [isShow, setIsShow] = useState(false);
   return (
     <div className="relative">
       <input
         id="password"
-        className="p-3 border bg-slate-200 focus:bg-white transition-all focus:border-blue-500 outline-none rounded-lg w-full mt-5"
+        className="p-3 border bg-slate-200 focus:bg-white transition-all focus:border-blue-500 outline-none rounded-lg w-full "
         type={isShow ? "text" : "password"}
         placeholder={placeholder}
         {...props}

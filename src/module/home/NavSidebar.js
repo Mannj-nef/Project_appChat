@@ -10,26 +10,24 @@ import NavItem from "./NavItem";
 import { auth } from "../../firebase/firebase-config";
 import { signOut } from "firebase/auth";
 import { toast } from "react-toastify";
+import { useAuthContext } from "../../contexts/auth-context";
 
 const navBars = [
   {
     id: 1,
     name: "Dashboard",
     icon: <IconDashboard />,
-    onClick: () => {},
   },
   {
     id: 2,
     name: "chat",
     icon: <IconMessage />,
-    onClick: () => {},
     path: router_link.MESSAGES,
   },
   {
     id: 3,
     name: "Users",
     icon: <IconUsers />,
-    onClick: () => {},
     path: router_link.USER,
   },
   {
@@ -44,20 +42,22 @@ const navBars = [
 ];
 
 const NavSidebar = () => {
+  const { userInfo } = useAuthContext();
+
   return (
     <>
-      <div className="nav border-r-black35 pt-3">
+      <div className="nav border-r-black35 pt-3 bg-black007a">
         <div className="w-10 h-10 mx-auto mb-3">
           <img
-            className="w-full h-full object-cover rounded-full border-white border"
-            src=" https://source.unsplash.com/random"
+            className="w-full h-full object-cover rounded-full border-white border p-1 flex item justify-centerf "
+            src={userInfo?.photoURL}
             alt="avatar"
           />
         </div>
         <div className="border-t-black35 w-10 m-auto mb-3"></div>
-        <div className="flex flex-col gap-5 h-screen">
+        <div className="flex flex-col gap-5 ">
           {navBars.map((item) => (
-            <NavItem item={item} key={item.id} onClick={item.onClick}>
+            <NavItem item={item} key={item.id}>
               {item.icon}
             </NavItem>
           ))}

@@ -3,18 +3,22 @@ import {
   onAuthStateChanged,
   signInWithPopup,
 } from "firebase/auth";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { router_link, TOAST_TYPE } from "../common ";
-import { auth } from "../firebase/firebase-config";
+import { firebase_collection, router_link, TOAST_TYPE } from "../common ";
+import { auth, db } from "../firebase/firebase-config";
+import { setDocById } from "../firebase/services";
 
 const AuthContext = createContext();
 
 const fbprovider = new FacebookAuthProvider();
+const colRef = collection(db, firebase_collection.USERS);
 
 function AuthProvider({ children, ...props }) {
   const [userInfo, setUserInfo] = useState({});
+
   const navigate = useNavigate();
 
   const handleSetUserInfo = (user) => {
@@ -23,14 +27,44 @@ function AuthProvider({ children, ...props }) {
 
   const handleSignInFacebook = async () => {
     try {
-      await signInWithPopup(auth, fbprovider);
+      const { providerId, user } = await signInWithPopup(auth, fbprovider);
+
+      const { displayName, email, phoneNumber, photoURL, uid, metadata } = user;
+      const creationTime = new Date(metadata.creationTime).toLocaleDateString(
+        "vi-VI"
+      );
+      const docUser = {
+        displayName,
+        email,
+        phoneNumber,
+        photoURL,
+        uid,
+        creationTime,
+        providerId,
+      };
+
+      const queryUser = query(
+        colRef,
+        where("uid", "==", uid),
+        where("email", "==", email)
+      );
+      // get list user
+      const listUser = await getDocs(queryUser);
+
+      if (listUser.empty) {
+        setDocById(firebase_collection.USERS, uid, docUser);
+      }
+
       toast.success("Login success", TOAST_TYPE);
+
       navigate(router_link.HOME);
     } catch (error) {
+      console.error(error.message);
       toast.error(error.message, TOAST_TYPE);
     }
   };
 
+  // onAuthStateChanged
   useEffect(() => {
     const unsubscibed = onAuthStateChanged(auth, (auth) => {
       setUserInfo(auth);

@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
  */
 
 const Button = ({
-  type = "button",
+  type = "submit",
   className = "",
   height,
   children,

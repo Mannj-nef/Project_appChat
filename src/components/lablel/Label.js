@@ -7,9 +7,13 @@ import PropTypes from "prop-types";
  * @returns
  */
 
-const Label = ({ htmlFor = "", children, ...props }) => {
+const Label = ({ htmlFor = "", children, className = "", ...props }) => {
   return (
-    <label className="font-medium" htmlFor={htmlFor} {...props}>
+    <label
+      className={`font-medium block ${className}`}
+      htmlFor={htmlFor}
+      {...props}
+    >
       {children}
     </label>
   );

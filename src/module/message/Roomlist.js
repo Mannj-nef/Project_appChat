@@ -1,14 +1,19 @@
 import React from "react";
 import { IconAddRoom, IconSearch } from "../../components/icon";
-import UserRoom from "./UserRoom";
+import { useRoomContext } from "../../contexts/chat-room-context";
+import UserRoom from "../../components/userRoom";
 
-const MessagesControl = () => {
+const Roomlist = () => {
+  const { rooms, setShowModalAddroom } = useRoomContext();
   return (
     <div>
       <div className="p-5 text-white">
         <div className="flex items-center justify-between">
           <h2 className="font-medium text-lg ">Messages</h2>
-          <span>
+          <span
+            className="cursor-pointer"
+            onClick={() => setShowModalAddroom(true)}
+          >
             <IconAddRoom></IconAddRoom>
           </span>
         </div>
@@ -26,11 +31,16 @@ const MessagesControl = () => {
         <UserRoom></UserRoom>
         <UserRoom active></UserRoom>
       </div>
-      <div className="text-white text-sm">
-        <p>ALL MESSAGE</p>
-      </div>
+      {!!rooms?.length && (
+        <div className="text-white text-sm">
+          <p>ALL MESSAGE</p>
+          {rooms.map((room) => (
+            <UserRoom key={room.id} room={room}></UserRoom>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
-export default MessagesControl;
+export default Roomlist;

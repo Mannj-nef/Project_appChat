@@ -17,6 +17,11 @@ export const validate = {
   PASSWORD: Yup.string().required().min(8, "PassWord minimum 8 characters"),
 };
 
+export const firebase_collection = {
+  USERS: "users",
+  ROOMS: "rooms",
+};
+
 export const TOAST_TYPE = {
   position: "top-right",
   autoClose: 1000,

@@ -7,8 +7,10 @@ import IconMessage from "./IconMessage";
 import IconSignOut from "./IconSignOut";
 import IconUsers from "./IconUsers";
 import IconSearch from "./IconSearch";
+import IconSend from "./IconSend";
 
 export {
+  IconSend,
   IconSearch,
   IconAddRoom,
   IconSignOut,
