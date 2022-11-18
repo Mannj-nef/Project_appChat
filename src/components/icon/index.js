@@ -8,8 +8,12 @@ import IconSignOut from "./IconSignOut";
 import IconUsers from "./IconUsers";
 import IconSearch from "./IconSearch";
 import IconSend from "./IconSend";
+import IconSetting from "./IconSetting";
+import IconDelete from "./IconDelete";
 
 export {
+  IconSetting,
+  IconDelete,
   IconSend,
   IconSearch,
   IconAddRoom,

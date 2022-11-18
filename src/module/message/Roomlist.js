@@ -2,9 +2,11 @@ import React from "react";
 import { IconAddRoom, IconSearch } from "../../components/icon";
 import { useRoomContext } from "../../contexts/chat-room-context";
 import UserRoom from "../../components/userRoom";
+import { useSearchParams } from "react-router-dom";
 
 const Roomlist = () => {
   const { rooms, setShowModalAddroom } = useRoomContext();
+  const [searchParam, setSearchParam] = useSearchParams();
   return (
     <div>
       <div className="p-5 text-white">
@@ -26,16 +28,22 @@ const Roomlist = () => {
           <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2"></IconSearch>
         </div>
       </div>
-      <div className="text-white text-sm">
+      {/* <div className="text-white text-sm">
         <p>PINNED MESSAGE</p>
         <UserRoom></UserRoom>
         <UserRoom active></UserRoom>
-      </div>
+      </div> */}
+
+      {/* LIST ROMMS */}
       {!!rooms?.length && (
         <div className="text-white text-sm">
           <p>ALL MESSAGE</p>
           {rooms.map((room) => (
-            <UserRoom key={room.id} room={room}></UserRoom>
+            <UserRoom
+              key={room.id}
+              room={room}
+              onClick={() => setSearchParam(`?room-id=${room.id}`)}
+            ></UserRoom>
           ))}
         </div>
       )}

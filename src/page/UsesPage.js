@@ -4,8 +4,6 @@ import useFirestore from "../hooks/useFirestore";
 
 const UsesPage = () => {
   const users = useFirestore(firebase_collection.USERS);
-
-  console.log(users);
   return (
     <div className="grid grid-cols-4 gap-5">
       {!!users.length &&

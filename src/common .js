@@ -20,11 +20,12 @@ export const validate = {
 export const firebase_collection = {
   USERS: "users",
   ROOMS: "rooms",
+  MESSAGE: "message",
 };
 
 export const TOAST_TYPE = {
   position: "top-right",
-  autoClose: 1000,
+  autoClose: 1500,
   hideProgressBar: false,
   closeOnClick: true,
   pauseOnHover: false,

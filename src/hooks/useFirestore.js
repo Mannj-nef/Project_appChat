@@ -25,6 +25,7 @@ const useFirestore = (firebaseCollection, condition) => {
         ...doc.data(),
         id: doc.id,
       }));
+
       setDocuments(documents);
     });
 

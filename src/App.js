@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 import "./index.scss";
 import { router_link } from "./common ";
-import AddRoomModal from "./components/modal/AddRoomModal";
+import Modal from "./components/modal/Modal";
 
 const HomePage = lazy(() => import("./page/HomePage"));
 const SignIn = lazy(() => import("./page/SignInPage"));
@@ -15,7 +15,7 @@ const NotFoundPage = lazy(() => import("./page/NotFoundPage"));
 function App() {
   return (
     <div className="App">
-      <AddRoomModal></AddRoomModal>
+      <Modal></Modal>
       <Suspense fallback={"loading"}>
         <Routes>
           <Route path={router_link.HOME} element={<HomePage />}>

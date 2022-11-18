@@ -7,3 +7,7 @@
 .form-control {
     // @apply rounded-lg shadow-lg;
 }
+
+.active-user {
+    @apply bg-black27 rounded-2xl text-white;
+}
