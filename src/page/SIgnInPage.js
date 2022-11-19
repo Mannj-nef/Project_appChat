@@ -1,52 +1,48 @@
-// import React from "react";
-// import { useForm } from "react-hook-form";
-// import { useNavigate } from "react-router-dom";
-// import * as Yup from "yup";
-// import { yupResolver } from "@hookform/resolvers/yup";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-// import { router_link, TOAST_TYPE, validate } from "../common ";
-// import Image from "../module/login/Image";
-// import { useAuthContext } from "../contexts/auth-context";
-// import FormLogin from "../module/login/FormLogin";
-// import { signInWithEmailAndPassword } from "firebase/auth";
-// import { auth } from "../firebase/firebase-config";
-// import { toast } from "react-toastify";
+import { router_link, TOAST_TYPE, validate } from "../common ";
+import Image from "../module/login/Image";
+import { useAuthContext } from "../contexts/auth-context";
+import FormLogin from "../module/login/FormLogin";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/firebase-config";
+import { toast } from "react-toastify";
 
-// const schema = Yup.object({
-//   email: validate.EMAIL,
-//   password: validate.PASSWORD,
-// });
+const schema = Yup.object({
+  email: validate.EMAIL,
+  password: validate.PASSWORD,
+});
 
 const SignInPage = () => {
-  // const { handleSetUserInfo } = useAuthContext();
-  // const navigate = useNavigate();
-  // const { handleSubmit, control, formState } = useForm({
-  //   mode: "onChange",
-  //   resolver: yupResolver(schema),
-  // });
-  // const { isValid, isSubmitting } = formState;
+  const { handleSetUserInfo } = useAuthContext();
+  const navigate = useNavigate();
+  const { handleSubmit, control, formState } = useForm({
+    mode: "onChange",
+    resolver: yupResolver(schema),
+  });
+  const { isValid, isSubmitting } = formState;
 
-  // const handleSignIn = async (values) => {
-  //   const { email, password } = values;
-  //   if (!isValid) return;
-  //   try {
-  //     const authSign = await signInWithEmailAndPassword(auth, email, password);
-  //     toast.success("Logged in successful", TOAST_TYPE);
-  //     console.log(authSign);
-  //     handleSetUserInfo(authSign);
-  //     navigate(router_link.HOME);
-  //   } catch (error) {
-  //     toast.error("Login failed, wrong account or password", TOAST_TYPE);
-  //     throw new Error(error);
-  //   }
-  // };
+  const handleSignIn = async (values) => {
+    const { email, password } = values;
+    if (!isValid) return;
+    try {
+      const authSign = await signInWithEmailAndPassword(auth, email, password);
+      toast.success("Logged in successful", TOAST_TYPE);
+      console.log(authSign);
+      handleSetUserInfo(authSign);
+      navigate(router_link.HOME);
+    } catch (error) {
+      toast.error("Login failed, wrong account or password", TOAST_TYPE);
+      throw new Error(error);
+    }
+  };
   return (
     <div className="flex">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum eaque
-      veniam id dolores illum voluptas placeat facere. Odio exercitationem,
-      maxime excepturi nulla quos tenetur laudantium, officiis enim unde quis
-      quisquam!
-      {/* <Image></Image>
+      <Image></Image>
       <FormLogin
         control={control}
         handleSubmit={handleSubmit(handleSignIn)}
@@ -65,7 +61,7 @@ const SignInPage = () => {
             Sign up
           </span>
         </p>
-      </FormLogin> */}
+      </FormLogin>
     </div>
   );
 };
