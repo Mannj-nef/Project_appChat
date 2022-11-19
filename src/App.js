@@ -26,7 +26,6 @@ function App() {
             <Route path={router_link.USER} element={<Users />}></Route>
           </Route>
           <Route path={router_link.SIGN_IN} element={<SignIn />}></Route>
-          {/* <Route path={router_link.SIGN_IN} element={<div>sing</div>}></Route> */}
           <Route path={router_link.SIGN_UP} element={<SignUp />}></Route>
 
           <Route path="*" element={<NotFoundPage />}></Route>
