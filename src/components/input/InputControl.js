@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useController } from "react-hook-form";
 import PropTypes from "prop-types";
 
@@ -47,4 +47,4 @@ InputControl.propTypes = {
   children: PropTypes.any,
 };
 
-export default InputControl;
+export default memo(InputControl);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 const IconDelete = ({ className = "" }) => {
   return (
@@ -19,4 +19,4 @@ const IconDelete = ({ className = "" }) => {
   );
 };
 
-export default IconDelete;
+export default memo(IconDelete);

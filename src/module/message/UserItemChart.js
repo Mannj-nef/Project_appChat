@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 
 const UserItemChart = ({ userName, text, time, avatar, isUser }) => {
@@ -68,4 +68,4 @@ UserItemChart.propTypes = {
   isUser: PropTypes.bool,
 };
 
-export default UserItemChart;
+export default memo(UserItemChart);

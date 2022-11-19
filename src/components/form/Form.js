@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 const Form = ({ children, handle, ...props }) => {
   return (
@@ -8,4 +8,4 @@ const Form = ({ children, handle, ...props }) => {
   );
 };
 
-export default Form;
+export default memo(Form);

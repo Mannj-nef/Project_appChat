@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 const IconSetting = ({ className = "" }) => {
   return (
@@ -24,4 +24,4 @@ const IconSetting = ({ className = "" }) => {
   );
 };
 
-export default IconSetting;
+export default memo(IconSetting);
