@@ -25,6 +25,7 @@ const SignInPage = () => {
     resolver: yupResolver(schema),
   });
   const { isValid, isSubmitting } = formState;
+
   const handleSignIn = async (values) => {
     const { email, password } = values;
     if (!isValid) return;
@@ -41,7 +42,11 @@ const SignInPage = () => {
   };
   return (
     <div className="flex">
-      <Image></Image>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum eaque
+      veniam id dolores illum voluptas placeat facere. Odio exercitationem,
+      maxime excepturi nulla quos tenetur laudantium, officiis enim unde quis
+      quisquam!
+      {/* <Image></Image>
       <FormLogin
         control={control}
         handleSubmit={handleSubmit(handleSignIn)}
@@ -60,7 +65,7 @@ const SignInPage = () => {
             Sign up
           </span>
         </p>
-      </FormLogin>
+      </FormLogin> */}
     </div>
   );
 };
