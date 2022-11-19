@@ -3,7 +3,13 @@ import {
   onAuthStateChanged,
   signInWithPopup,
 } from "firebase/auth";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  serverTimestamp,
+  where,
+} from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -29,10 +35,8 @@ function AuthProvider({ children, ...props }) {
     try {
       const { providerId, user } = await signInWithPopup(auth, fbprovider);
 
-      const { displayName, email, phoneNumber, photoURL, uid, metadata } = user;
-      const creationTime = new Date(metadata.creationTime).toLocaleDateString(
-        "vi-VI"
-      );
+      const { displayName, email, phoneNumber, photoURL, uid } = user;
+      const creationTime = serverTimestamp();
       const docUser = {
         displayName,
         email,

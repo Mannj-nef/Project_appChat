@@ -1,9 +1,9 @@
 import {
   addDoc,
   collection,
-  doc,
   onSnapshot,
   query,
+  serverTimestamp,
   where,
 } from "firebase/firestore";
 import React from "react";
@@ -60,7 +60,7 @@ const WindownChat = () => {
       message,
       photoURL: userInfo?.photoURL,
       uid: userInfo?.uid,
-      creationTime: new Date(),
+      creationTime: serverTimestamp(),
       displayName: userInfo?.displayName,
       romeId: idRoom,
     };
@@ -138,14 +138,26 @@ const WindownChat = () => {
             className="mess-content flex-1 flex flex-col  overflow-auto mb-5"
           >
             {messageList?.length > 0 &&
-              messageList?.map((mess) => (
-                <UserItemChart
-                  key={mess?.id}
-                  avata={mess?.photoURL}
-                  text={mess?.message}
-                  userName={mess?.displayName}
-                ></UserItemChart>
-              ))}
+              messageList?.map((mess) =>
+                mess?.uid !== userInfo.uid ? (
+                  <UserItemChart
+                    key={mess?.id}
+                    avatar={mess?.photoURL}
+                    text={mess?.message}
+                    userName={mess?.displayName}
+                    time={mess?.creationTime?.seconds}
+                  ></UserItemChart>
+                ) : (
+                  <UserItemChart
+                    isUser
+                    key={mess?.id}
+                    avatar={mess?.photoURL}
+                    text={mess?.message}
+                    userName={mess?.displayName}
+                    time={mess?.creationTime?.seconds}
+                  ></UserItemChart>
+                )
+              )}
           </div>
 
           <Form handle={handleSubmit(handleSubmitMessage)}>

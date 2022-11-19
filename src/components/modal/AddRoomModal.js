@@ -1,4 +1,4 @@
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import React, { useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { firebase_collection, TOAST_TYPE } from "../../common ";
@@ -6,9 +6,6 @@ import { useAuthContext } from "../../contexts/auth-context";
 import { useRoomContext } from "../../contexts/chat-room-context";
 import { db } from "../../firebase/firebase-config";
 import useFirestore from "../../hooks/useFirestore";
-import { IconSearch } from "../icon";
-import UserRoom from "../userRoom/UserRoom";
-import Modal from "./Modal";
 import ModalItem from "./ModalItem";
 
 const colRef = collection(db, firebase_collection.ROOMS);
@@ -33,7 +30,6 @@ const AddRoomModal = () => {
     e.target.classList.toggle("active-user");
     const hasClass = e.target.classList.contains("active-user");
     if (hasClass) {
-      console.log(0);
       setListIdUser((prevUser) => [...prevUser, id]);
     } else {
       const roomListId = listIdUser.filter((item) => item !== id);
@@ -52,6 +48,7 @@ const AddRoomModal = () => {
     }
     const data = {
       displayName: roomName,
+      creationTime: serverTimestamp(),
       admins: [userInfo?.uid],
       members: [...listIdUser, userInfo?.uid],
     };

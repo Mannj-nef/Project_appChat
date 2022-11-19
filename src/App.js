@@ -6,7 +6,7 @@ import { router_link } from "./common ";
 import Modal from "./components/modal/Modal";
 
 const HomePage = lazy(() => import("./page/HomePage"));
-const SignIn = lazy(() => import("./page/SignInPage"));
+// const SignIn = lazy(() => import("./page/SignInPage"));
 const SignUp = lazy(() => import("./page/SignUpPage"));
 const WindownChat = lazy(() => import("./module/home/WindownChat"));
 const Users = lazy(() => import("./page/UsesPage"));
@@ -25,7 +25,7 @@ function App() {
             ></Route>
             <Route path={router_link.USER} element={<Users />}></Route>
           </Route>
-          <Route path={router_link.SIGN_IN} element={<SignIn />}></Route>
+          {/* <Route path={router_link.SIGN_IN} element={<SignIn />}></Route> */}
           <Route path={router_link.SIGN_UP} element={<SignUp />}></Route>
 
           <Route path="*" element={<NotFoundPage />}></Route>

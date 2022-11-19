@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -12,18 +12,17 @@ import {
   validate,
 } from "../common ";
 import Image from "../module/login/Image";
-import { auth, db } from "../firebase/firebase-config";
+import { auth } from "../firebase/firebase-config";
 import { toast } from "react-toastify";
 import FormLogin from "../module/login/FormLogin";
 import { setDocById } from "../firebase/services";
-import { collection, getDocs, query, where } from "firebase/firestore";
 import { useAuthContext } from "../contexts/auth-context";
+import { serverTimestamp } from "firebase/firestore";
 const schema = Yup.object({
   email: validate.EMAIL,
   password: validate.PASSWORD,
 });
 
-const colRef = collection(db, firebase_collection.USERS);
 const avatarImage =
   "https://kucuklerocakbasi.com.tr/themes/tastyigniter-orange/assets/avatar.png";
 
@@ -51,9 +50,7 @@ const SignUpPage = () => {
         );
 
         const { email, phoneNumber, uid, metadata } = user;
-        const creationTime = new Date(metadata.creationTime).toLocaleDateString(
-          "vi-VI"
-        );
+        const creationTime = serverTimestamp();
         const docUser = {
           displayName,
           email,
