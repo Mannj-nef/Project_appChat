@@ -8,7 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import { db } from "../firebase/firebase-config";
 
-const useFirestore = (firebaseCollection, condition) => {
+const useFirestore = (firebaseCollection, condition, ...propsQuery) => {
   const [documents, setDocuments] = useState([]);
 
   useEffect(() => {
@@ -22,7 +22,12 @@ const useFirestore = (firebaseCollection, condition) => {
     const collectionQuery = condition
       ? query(
           collectionRef,
-          where(condition.fieldName, condition.operator, condition.compareValue)
+          where(
+            condition?.fieldName,
+            condition?.operator,
+            condition?.compareValue
+          ),
+          ...propsQuery
         )
       : collectionRef;
 
@@ -36,6 +41,7 @@ const useFirestore = (firebaseCollection, condition) => {
     });
 
     return unsubscribe;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [firebaseCollection, condition]);
 
   return documents;

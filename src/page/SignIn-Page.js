@@ -32,7 +32,6 @@ const SignInPage = () => {
     try {
       const authSign = await signInWithEmailAndPassword(auth, email, password);
       toast.success("Logged in successful", TOAST_TYPE);
-      console.log(authSign);
       handleSetUserInfo(authSign);
       navigate(router_link.HOME);
     } catch (error) {

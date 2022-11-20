@@ -50,13 +50,13 @@ const SignUpPage = () => {
         );
 
         const { email, phoneNumber, uid, metadata } = user;
-        const creationTime = serverTimestamp();
+        const timestamp = serverTimestamp();
         const docUser = {
           displayName,
           email,
           phoneNumber,
           uid,
-          creationTime,
+          timestamp,
           providerId,
           photoURL: avatarImage,
         };

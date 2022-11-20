@@ -3,6 +3,7 @@ import {
   collection,
   doc,
   onSnapshot,
+  orderBy,
   query,
   serverTimestamp,
   updateDoc,
@@ -53,7 +54,11 @@ const WindownChat = () => {
     };
   }, [idRoom]);
 
-  const messageList = useFirestore(firebase_collection.MESSAGE, condition);
+  const messageList = useFirestore(
+    firebase_collection.MESSAGE,
+    condition,
+    orderBy("timestamp", "asc")
+  );
 
   const handleSubmitMessage = async (values) => {
     const { message } = values;
@@ -63,7 +68,7 @@ const WindownChat = () => {
       message,
       photoURL: userInfo?.photoURL,
       uid: userInfo?.uid,
-      creationTime: serverTimestamp(),
+      timestamp: serverTimestamp(),
       displayName: userInfo?.displayName,
       romeId: idRoom,
     };
@@ -85,8 +90,8 @@ const WindownChat = () => {
   };
 
   const handleRemoveUser = async (id) => {
-    const arrayMember = roomChat?.members.filter((item) => item !== id);
-    const arrayAdmins = roomChat?.admins.filter((item) => item !== id);
+    const arrayMember = roomChat?.members?.filter((item) => item !== id);
+    const arrayAdmins = roomChat?.admins?.filter((item) => item !== id);
 
     const docRef = doc(db, firebase_collection.ROOMS, idRoom);
     await updateDoc(docRef, {
@@ -96,15 +101,14 @@ const WindownChat = () => {
   };
 
   const handleOutGroop = async () => {
-    const arrayMember = roomChat?.members.filter(
+    const arrayMember = roomChat?.members?.filter(
       (item) => item !== userInfo.uid
     );
-    const arrayAdmins = roomChat?.admins.filter(
+    const arrayAdmins = roomChat?.admins?.filter(
       (item) => item !== userInfo.uid
     );
 
     const adminList = arrayAdmins.length > 0 ? arrayAdmins : [arrayMember[0]];
-    console.log(adminList);
 
     const docRef = doc(db, firebase_collection.ROOMS, idRoom);
     await updateDoc(docRef, {
@@ -143,12 +147,12 @@ const WindownChat = () => {
 
   // get member room chart
   useEffect(() => {
-    fetchMember(roomChat.members, setUserInRoom);
+    fetchMember(roomChat?.members, setUserInRoom);
   }, [fetchMember, roomChat]);
 
   // get member addmin room chart
   useEffect(() => {
-    fetchMember(roomChat.admins, serUserAddminInRoom);
+    fetchMember(roomChat?.admins, serUserAddminInRoom);
   }, [fetchMember, roomChat]);
 
   if (!idRoom)
@@ -185,7 +189,7 @@ const WindownChat = () => {
         <div className="p-5 flex flex-1 flex-col  justify-end h-[500px] ">
           <div
             ref={messageListRef}
-            className="mess-content flex-1 flex flex-col  overflow-auto mb-5"
+            className="mess-content flex-1 flex flex-col  overflow-y-auto overflow-x-hidden p-5 mb-5"
           >
             {messageList?.length > 0 &&
               messageList?.map((mess) =>
@@ -195,7 +199,7 @@ const WindownChat = () => {
                     avatar={mess?.photoURL}
                     text={mess?.message}
                     userName={mess?.displayName}
-                    time={mess?.creationTime?.seconds}
+                    time={mess?.timestamp?.seconds}
                   ></UserItemChart>
                 ) : (
                   <UserItemChart
@@ -204,7 +208,7 @@ const WindownChat = () => {
                     avatar={mess?.photoURL}
                     text={mess?.message}
                     userName={mess?.displayName}
-                    time={mess?.creationTime?.seconds}
+                    time={mess?.timestamp?.seconds}
                   ></UserItemChart>
                 )
               )}

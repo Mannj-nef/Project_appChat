@@ -36,14 +36,14 @@ function AuthProvider({ children, ...props }) {
       const { providerId, user } = await signInWithPopup(auth, fbprovider);
 
       const { displayName, email, phoneNumber, photoURL, uid } = user;
-      const creationTime = serverTimestamp();
+      const timestamp = serverTimestamp();
       const docUser = {
         displayName,
         email,
         phoneNumber,
         photoURL,
         uid,
-        creationTime,
+        timestamp,
         providerId,
       };
 

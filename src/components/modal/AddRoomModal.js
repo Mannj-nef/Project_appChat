@@ -1,4 +1,9 @@
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  orderBy,
+  serverTimestamp,
+} from "firebase/firestore";
 import React, { useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { firebase_collection, TOAST_TYPE } from "../../common ";
@@ -24,7 +29,11 @@ const AddRoomModal = () => {
     };
   }, [userInfo?.uid]);
 
-  const users = useFirestore(firebase_collection.USERS, roomsCondition);
+  const users = useFirestore(
+    firebase_collection.USERS,
+    roomsCondition,
+    orderBy("uid", "desc")
+  );
 
   const handleSelectUser = (e, id) => {
     e.target.classList.toggle("active-user");
@@ -48,7 +57,7 @@ const AddRoomModal = () => {
     }
     const data = {
       displayName: roomName,
-      creationTime: serverTimestamp(),
+      timestamp: serverTimestamp(),
       admins: [userInfo?.uid],
       members: [...listIdUser, userInfo?.uid],
     };

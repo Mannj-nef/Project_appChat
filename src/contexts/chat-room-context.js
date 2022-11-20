@@ -1,4 +1,4 @@
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot, orderBy } from "firebase/firestore";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { db } from "../firebase/firebase-config";
 import useFirestore from "../hooks/useFirestore";
@@ -26,7 +26,11 @@ const RoomProvider = ({ children }) => {
     };
   }, [userInfo?.uid]);
 
-  const rooms = useFirestore(firebase_collection.ROOMS, roomsCondition);
+  const rooms = useFirestore(
+    firebase_collection.ROOMS,
+    roomsCondition,
+    orderBy("timestamp", "desc")
+  );
 
   useEffect(() => {
     if (!idRoom) return;

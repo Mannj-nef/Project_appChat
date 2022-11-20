@@ -7,6 +7,12 @@ import { useRoomContext } from "../../contexts/chat-room-context";
 const NavItem = ({ children, item, ...props }) => {
   const { showDashboard, setShowDashboard } = useRoomContext();
 
+  const handleDashboard = (e) => {
+    const target = e.target;
+    setShowDashboard(!showDashboard);
+    target.classList.toggle("text-blue-400");
+  };
+
   if (item.path) {
     return (
       <NavLink
@@ -25,12 +31,9 @@ const NavItem = ({ children, item, ...props }) => {
   }
   return (
     <div
-      to={item.path}
       className=" border-l-2 border-l-transparent px-5 py-3 cursor-pointer text-white"
       onClick={
-        item.name === "Dashboard"
-          ? () => setShowDashboard(!showDashboard)
-          : item.onClick
+        item.name === "Dashboard" ? (e) => handleDashboard(e) : item.onClick
       }
       {...props}
     >
