@@ -11,6 +11,7 @@ const HomePage = () => {
   // console.log(userInfo);
 
   if (!userInfo) {
+    console.log(userInfo);
     navigate(router_link.SIGN_IN);
     return;
   }

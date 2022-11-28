@@ -1,7 +1,14 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
 
-const UserItemChart = ({ userName, text, time, avatar, isUser }) => {
+const UserItemChart = ({
+  userName,
+  text,
+  time,
+  avatar,
+  isUser,
+  image = "",
+}) => {
   const handleFormatTime = (seconds) => {
     if (!seconds) return "";
     return new Date(seconds * 1000).toLocaleTimeString([], {
@@ -36,7 +43,7 @@ const UserItemChart = ({ userName, text, time, avatar, isUser }) => {
                 <img
                   className="w-full h-full object-cover rounded-full"
                   src={avatar}
-                  alt=""
+                  alt="avatar"
                 />
               </div>
               <h3>{userName || "name"}</h3>
@@ -44,16 +51,26 @@ const UserItemChart = ({ userName, text, time, avatar, isUser }) => {
             </>
           )}
         </div>
+
         <div className="mess-content text-white mt-2">
           <p
-            className={`${
+            className={` ${
               isUser
                 ? "ml-auto rounded-br-2xl rounded-l-2xl"
                 : " rounded-bl-2xl rounded-r-2xl"
             } bg-black17 py-2 px-5 max-w-[400px] w-fit mt-3`}
           >
-            {text || "Lorem ipsum dolor sit lorem ."}
+            {text}
           </p>
+          {image && (
+            <img
+              className={`${
+                isUser ? " ml-auto" : " mr-auto"
+              } mt-2 rounded-xl w-[200px] h-[200px] object-cover`}
+              src={image}
+              alt=""
+            />
+          )}
         </div>
       </div>
     </>
@@ -63,7 +80,7 @@ const UserItemChart = ({ userName, text, time, avatar, isUser }) => {
 UserItemChart.propTypes = {
   avata: PropTypes.string,
   userName: PropTypes.string,
-  text: PropTypes.string,
+  text: PropTypes.any,
   time: PropTypes.number,
   isUser: PropTypes.bool,
 };

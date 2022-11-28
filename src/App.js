@@ -2,6 +2,8 @@ import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import "./index.scss";
+import "react-quill/dist/quill.snow.css";
+
 import { router_link } from "./common ";
 import Modal from "./components/modal/Modal";
 

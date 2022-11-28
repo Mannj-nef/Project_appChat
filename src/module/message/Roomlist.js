@@ -3,10 +3,13 @@ import { IconAddRoom, IconSearch } from "../../components/icon";
 import { useRoomContext } from "../../contexts/chat-room-context";
 import UserRoom from "../../components/userRoom";
 import { useSearchParams } from "react-router-dom";
+import LoadingSpiner from "../../components/loading/LoadingSpiner";
+import useLoading from "../../hooks/useLoading";
 
 const Roomlist = () => {
   const { rooms, setShowModalAddroom } = useRoomContext();
-  const [searchParam, setSearchParam] = useSearchParams();
+  const { isLoading } = useLoading(rooms);
+  const [, setSearchParam] = useSearchParams();
 
   return (
     <div>
@@ -36,17 +39,21 @@ const Roomlist = () => {
       </div> */}
 
       {/* LIST ROMMS */}
-      {!!rooms?.length && (
-        <div className="text-white text-sm">
-          <p>ALL MESSAGE</p>
-          {rooms.map((room) => (
-            <UserRoom
-              key={room.id}
-              room={room}
-              onClick={() => setSearchParam(`?room-id=${room.id}`)}
-            ></UserRoom>
-          ))}
-        </div>
+      {!isLoading ? (
+        !!rooms?.length && (
+          <div className="text-white text-sm">
+            <p>ALL MESSAGE</p>
+            {rooms.map((room) => (
+              <UserRoom
+                key={room.id}
+                room={room}
+                onClick={() => setSearchParam(`?room-id=${room.id}`)}
+              ></UserRoom>
+            ))}
+          </div>
+        )
+      ) : (
+        <LoadingSpiner />
       )}
     </div>
   );

@@ -47,7 +47,7 @@ const NavSidebar = () => {
   return (
     <>
       <div className="nav border-r-black35 pt-3 bg-black007a">
-        <div className="w-10 h-10 mx-auto mb-3">
+        <div title={userInfo.displayName} className="w-10 h-10 mx-auto mb-3">
           <img
             className="w-full h-full object-cover rounded-full border-white border p-1 flex item justify-centerf "
             src={userInfo?.photoURL}
@@ -62,6 +62,7 @@ const NavSidebar = () => {
             </NavItem>
           ))}
         </div>
+        <p className="text-white">{userInfo.displayName}</p>
       </div>
     </>
   );

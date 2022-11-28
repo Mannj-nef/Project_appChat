@@ -26,8 +26,10 @@ function AuthProvider({ children, ...props }) {
   const [userInfo, setUserInfo] = useState({});
 
   const navigate = useNavigate();
+  // console.log(userInfo);
 
   const handleSetUserInfo = (user) => {
+    console.log(user);
     setUserInfo(user);
   };
 
@@ -71,11 +73,20 @@ function AuthProvider({ children, ...props }) {
   // onAuthStateChanged
   useEffect(() => {
     const unsubscibed = onAuthStateChanged(auth, (auth) => {
+      if (!auth) {
+        setUserInfo(auth);
+        return;
+      }
+      const index = auth?.email.indexOf("@");
+      const displayName = auth?.email.slice(0, index);
+
+      const fullname = auth?.displayName;
+      auth.displayName = fullname || displayName;
       setUserInfo(auth);
     });
 
     return () => unsubscibed();
-  }, [navigate]);
+  }, []);
 
   const value = { userInfo, handleSetUserInfo, handleSignInFacebook };
   return (

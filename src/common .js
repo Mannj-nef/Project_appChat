@@ -23,6 +23,11 @@ export const firebase_collection = {
   MESSAGE: "message",
 };
 
+export const role_room = {
+  USER: "user",
+  ADMIN: "admin",
+};
+
 export const TOAST_TYPE = {
   position: "top-right",
   autoClose: 1500,

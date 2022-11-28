@@ -12,7 +12,10 @@ const UserRoom = ({ active, room, onClick, className = "" }) => {
       <div className="w-[60px] h-[60px]  p-1 border-white rounded-full pointer-events-none">
         <img
           className="w-full h-full rounded-full object-cover"
-          src={`${room?.photoURL || "https://source.unsplash.com/random"}`}
+          src={`${
+            room?.photoURL ||
+            "https://images.unsplash.com/photo-1475483768296-6163e08872a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Z3JvdXAlMjBtZXNzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+          }`}
           alt=""
         />
       </div>
