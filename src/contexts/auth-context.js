@@ -63,7 +63,7 @@ function AuthProvider({ children, ...props }) {
 
       toast.success("Login success", TOAST_TYPE);
 
-      navigate(router_link.HOME);
+      navigate(router_link.MESSAGES);
     } catch (error) {
       console.error(error.message);
       toast.error(error.message, TOAST_TYPE);
