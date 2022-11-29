@@ -49,7 +49,7 @@ const SignUpPage = () => {
           values.password
         );
 
-        const { email, phoneNumber, uid, metadata } = user;
+        const { email, phoneNumber, uid } = user;
         const timestamp = serverTimestamp();
         const docUser = {
           displayName,
@@ -64,7 +64,7 @@ const SignUpPage = () => {
         handleSetUserInfo(docUser);
 
         reset();
-        navigate(router_link.HOME);
+        navigate(router_link.MESSAGES);
 
         toast.success("Rigister successful", TOAST_TYPE);
       } catch (error) {

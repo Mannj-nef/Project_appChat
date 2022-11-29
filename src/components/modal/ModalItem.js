@@ -16,7 +16,7 @@ const ModalItem = ({ users, handleSelectUser, children }) => {
           type="text"
           placeholder="Search"
         />
-        <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2"></IconSearch>
+        <IconSearch className=" text-white absolute left-3 top-1/2 -translate-y-1/2"></IconSearch>
       </div>
       <div className="mt-5 min-h-[390px]">
         {!isLoading ? (

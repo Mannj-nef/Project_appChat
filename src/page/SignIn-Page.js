@@ -33,7 +33,7 @@ const SignInPage = () => {
       const authSign = await signInWithEmailAndPassword(auth, email, password);
       toast.success("Logged in successful", TOAST_TYPE);
       handleSetUserInfo(authSign);
-      navigate(router_link.HOME);
+      navigate(router_link.MESSAGES);
     } catch (error) {
       toast.error("Login failed, wrong account or password", TOAST_TYPE);
       throw new Error(error);

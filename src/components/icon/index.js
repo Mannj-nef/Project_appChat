@@ -10,9 +10,11 @@ import IconSearch from "./IconSearch";
 import IconSend from "./IconSend";
 import IconSetting from "./IconSetting";
 import IconDelete from "./IconDelete";
+import IconUserCircle from "./IconUserCircle";
 
 export {
   IconSetting,
+  IconUserCircle,
   IconDelete,
   IconSend,
   IconSearch,

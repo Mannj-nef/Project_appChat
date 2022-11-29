@@ -13,6 +13,7 @@ const SignUp = lazy(() => import("./page/SignUpPage"));
 const WindownChat = lazy(() => import("./module/home/WindownChat"));
 const Users = lazy(() => import("./page/UsesPage"));
 const NotFoundPage = lazy(() => import("./page/NotFoundPage"));
+const Profile = lazy(() => import("./page/Profile"));
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               element={<WindownChat />}
             ></Route>
             <Route path={router_link.USER} element={<Users />}></Route>
+            <Route path={router_link.PROFILE} element={<Profile />}></Route>
           </Route>
           <Route path={router_link.SIGN_IN} element={<SignIn />}></Route>
           <Route path={router_link.SIGN_UP} element={<SignUp />}></Route>

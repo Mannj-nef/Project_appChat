@@ -6,6 +6,7 @@ export const router_link = {
   SIGN_IN: "/sign-in",
   MESSAGES: "/messages",
   USER: "/user",
+  PROFILE: "/profile",
 };
 
 export const validate = {

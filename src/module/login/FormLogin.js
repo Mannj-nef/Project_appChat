@@ -10,16 +10,10 @@ import { useAuthContext } from "../../contexts/auth-context";
 
 import PropTypes from "prop-types";
 
-const FormLogin = ({
-  handleSubmit,
-  isSubmitting,
-  control,
-  formState,
-  children,
-  status,
-  title,
-  desc,
-}) => {
+const FormLogin = (props) => {
+  const { children, status, title, desc } = props;
+  const { handleSubmit, isSubmitting, control, formState } = props;
+
   const { handleSignInFacebook } = useAuthContext();
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-white ">
