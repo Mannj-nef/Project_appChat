@@ -1,26 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { query, updateDoc, where } from "firebase/firestore";
+import { collection, doc, onSnapshot } from "firebase/firestore";
+import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+
 import Form from "../components/form";
 import Field from "../components/field";
 import Label from "../components/lablel";
 import InputControl from "../components/input";
 import Button from "../components/button";
-import { useForm } from "react-hook-form";
-import { useEffect } from "react";
-import {
-  collection,
-  doc,
-  onSnapshot,
-  query,
-  updateDoc,
-  where,
-} from "firebase/firestore";
 import { db } from "../firebase/firebase-config";
 import { firebase_collection, TOAST_TYPE } from "../common ";
 import { useAuthContext } from "../contexts/auth-context";
 import InputFileUploadImage from "../components/input/InputFileUploadImage";
 import useImageUpload from "../hooks/useImageUpload";
-import { toast } from "react-toastify";
 import { IconDelete } from "../components/icon";
+import { generateKeywords } from "../firebase/services";
 
 const Profile = () => {
   const { userInfo } = useAuthContext();
@@ -62,8 +57,12 @@ const Profile = () => {
   };
 
   const handleUpdateProfile = async (values) => {
-    const { uid } = values;
-    updateDocFirebase(uid, values);
+    const { uid, displayName } = values;
+    const data = {
+      ...values,
+      keywords: generateKeywords(displayName),
+    };
+    updateDocFirebase(uid, data);
   };
 
   const handleRemoveImage = () => {

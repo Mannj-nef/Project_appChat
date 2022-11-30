@@ -1,21 +1,15 @@
-import {
-  FacebookAuthProvider,
-  onAuthStateChanged,
-  signInWithPopup,
-} from "firebase/auth";
-import {
-  collection,
-  getDocs,
-  query,
-  serverTimestamp,
-  where,
-} from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
+import { FacebookAuthProvider } from "firebase/auth";
+import { onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import { serverTimestamp, where } from "firebase/firestore";
+import { collection, getDocs, query } from "firebase/firestore";
+
 import { firebase_collection, router_link, TOAST_TYPE } from "../common ";
 import { auth, db } from "../firebase/firebase-config";
-import { setDocById } from "../firebase/services";
+import { generateKeywords, setDocById } from "../firebase/services";
 
 const AuthContext = createContext();
 
@@ -29,7 +23,6 @@ function AuthProvider({ children, ...props }) {
   // console.log(userInfo);
 
   const handleSetUserInfo = (user) => {
-    console.log(user);
     setUserInfo(user);
   };
 
@@ -47,6 +40,7 @@ function AuthProvider({ children, ...props }) {
         uid,
         timestamp,
         providerId,
+        keywords: generateKeywords(displayName),
       };
 
       const queryUser = query(

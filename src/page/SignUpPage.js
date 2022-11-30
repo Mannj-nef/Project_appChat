@@ -15,7 +15,7 @@ import Image from "../module/login/Image";
 import { auth } from "../firebase/firebase-config";
 import { toast } from "react-toastify";
 import FormLogin from "../module/login/FormLogin";
-import { setDocById } from "../firebase/services";
+import { generateKeywords, setDocById } from "../firebase/services";
 import { useAuthContext } from "../contexts/auth-context";
 import { serverTimestamp } from "firebase/firestore";
 const schema = Yup.object({
@@ -59,6 +59,7 @@ const SignUpPage = () => {
           timestamp,
           providerId,
           photoURL: avatarImage,
+          keywords: generateKeywords(displayName),
         };
         await setDocById(firebase_collection.USERS, uid, docUser);
         handleSetUserInfo(docUser);
