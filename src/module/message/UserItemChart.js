@@ -29,13 +29,13 @@ const UserItemChart = ({
             <>
               <span>{handleFormatTime(time)}</span>
               <h3>{userName || "name"}</h3>
-              <div className="w-[30px] h-[30px]">
+              {/* <div className="w-[30px] h-[30px]">
                 <img
                   className="w-full h-full object-cover rounded-full"
                   src={avatar}
                   alt="avatar"
                 />
-              </div>
+              </div> */}
             </>
           ) : (
             <>

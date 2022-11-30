@@ -64,10 +64,10 @@ const WindownChat = () => {
     setImageUrlFile,
   } = useImageUpload();
 
-  const handleUploadMess = (value) => {
+  const handleUploadMess = (value, e) => {
     setValueMessage(value);
     // check enter submit;
-    console.log({ value });
+    // console.log(value, e);
   };
 
   const handleSubmitMessage = async () => {
@@ -187,7 +187,7 @@ const WindownChat = () => {
                 theme="snow"
                 placeholder="Message..."
                 value={valueMessage}
-                onChange={(value) => handleUploadMess(value)}
+                onChange={(value, e) => handleUploadMess(value, e)}
               />
             </div>
             <div className="absolute py-2 px-3 right-5 bottom-2 bg-blue-600 text-white rounded-xl cursor-pointer flex gap-3 items-center">
