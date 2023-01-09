@@ -22,6 +22,7 @@ const UsesPage = () => {
   }, [userInfo?.uid]);
 
   const users = useFirestore(firebase_collection.USERS, usersCondition);
+
   const { isLoading: loadingUsers } = useLoading(users);
 
   const handleCreateRoomChat = async (user) => {
@@ -44,7 +45,7 @@ const UsesPage = () => {
     }
   };
   return (
-    <div className="flex-1 p-20 min-h-[300px]">
+    <div className="flex-1 p-20 min-h-[300px] overflow-auto">
       <div
         className={`${
           !loadingUsers ? "grid grid-cols-4" : ""

@@ -57,7 +57,10 @@ const Profile = () => {
   };
 
   const handleUpdateProfile = async (values) => {
-    const { uid, displayName } = values;
+    const { uid, displayName, phoneNumber } = values;
+    userInfo.displayName = displayName;
+    userInfo.phoneNumber = phoneNumber;
+
     const data = {
       ...values,
       keywords: generateKeywords(displayName),
