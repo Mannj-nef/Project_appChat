@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
+import { useAuthContext } from "../../contexts/auth-context";
 
 const UserItemChart = ({
   userName,
@@ -9,6 +10,8 @@ const UserItemChart = ({
   isUser,
   image = "",
 }) => {
+  const { userInfo } = useAuthContext();
+
   const handleFormatTime = (seconds) => {
     if (!seconds) return "";
     return new Date(seconds * 1000).toLocaleTimeString([], {
@@ -28,7 +31,7 @@ const UserItemChart = ({
           {isUser ? (
             <>
               <span>{handleFormatTime(time)}</span>
-              <h3>{userName || "name"}</h3>
+              <h3>{userInfo.displayName || userName || "name"}</h3>
               {/* <div className="w-[30px] h-[30px]">
                 <img
                   className="w-full h-full object-cover rounded-full"
